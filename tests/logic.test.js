@@ -10,7 +10,7 @@ test("life-safety and urgent needs are surfaced in the score explanation", () =>
     people: 18,
     corroborations: 1
   });
-  assert.equal(result.score, 82);
+  assert.equal(result.score, 87);
   assert.equal(result.tier, "Critical");
   assert.match(result.factors[0].label, /life-safety/);
 });

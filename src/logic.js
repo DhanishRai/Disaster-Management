@@ -5,6 +5,7 @@ const TIME_SENSITIVE_POINTS = 15;
 const CORROBORATION_POINTS = 10;
 
 const urgentNeeds = new Set(["medical supplies", "medication", "clean water", "drinking water", "rescue", "evacuation support"]);
+const isUrgentNeed = (need) => urgentNeeds.has(need.toLowerCase()) || /\b(boat|first aid|life vest|life jacket|rescue|evacuat)\b/i.test(need);
 const lifeSafetyPatterns = [
   { pattern: /\b(trapped|stuck|stranded|can't get out|cannot get out)\b/i, value: "trapped" },
   { pattern: /\b(injur(?:ed|y)|bleeding|unconscious|not breathing|heart medication|urgent medication)\b/i, value: "medical" },
@@ -29,7 +30,7 @@ export function scoreIncident(incident) {
 
   const factors = [
     { label: "Immediate life-safety concern", detail: lifeSafety.length ? lifeSafety.join(", ") : "", points: lifeSafety.length ? LIFE_SAFETY_POINTS : 0 },
-    { label: "Urgent essential needs reported", detail: needs.filter((need) => urgentNeeds.has(need.toLowerCase())).join(", "), points: needs.some((need) => urgentNeeds.has(need.toLowerCase())) ? URGENT_NEED_POINTS : 0 },
+    { label: "Urgent essential needs reported", detail: needs.filter(isUrgentNeed).join(", "), points: needs.some(isUrgentNeed) ? URGENT_NEED_POINTS : 0 },
     { label: "People potentially affected", detail: people ? `${people} reported` : "Count not reported", points: people >= 25 ? AFFECTED_PEOPLE_POINTS : people >= 10 ? 12 : people > 0 ? 5 : 0 },
     { label: "Time-sensitive conditions", detail: conditions.join(", "), points: conditions.length ? TIME_SENSITIVE_POINTS : 0 },
     { label: "Independent corroboration", detail: corroborations ? `${corroborations} additional source${corroborations === 1 ? "" : "s"}` : "Not yet corroborated", points: Math.min(corroborations * 5, CORROBORATION_POINTS) }

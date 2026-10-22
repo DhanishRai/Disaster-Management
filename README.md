@@ -8,7 +8,7 @@ Fieldline is a ready-to-run, dependency-free disaster response dashboard for con
 
 ## Run it
 
-Requires Node.js 18 or newer. No package installation or build step is needed.
+Requires Python 3 to serve the app; Node.js 18 or newer is needed only to run the tests. No package installation or build step is needed.
 
 ```sh
 npm start
