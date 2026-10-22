@@ -1,0 +1,13 @@
+{
+  "name": "fieldline-disaster-response",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A human-in-the-loop disaster response coordination dashboard.",
+  "scripts": {
+    "start": "python3 -m http.server 4173",
+    "test": "node --test"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
